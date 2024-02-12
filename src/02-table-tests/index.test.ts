@@ -1,17 +1,199 @@
-// Uncomment the code below and write your tests
-/* import {  simpleCalculator, Action } from './index';
+import { simpleCalculator, Action } from './index';
 
 const testCases = [
-    { a: 1, b: 2, action: Action.Add, expected: 3 },
-    { a: 2, b: 2, action: Action.Add, expected: 4 },
-    { a: 3, b: 2, action: Action.Add, expected: 5 },
-    // continue cases for other actions    
-]; */
+  {
+    a: 1,
+    b: 2,
+    action: Action.Add,
+    expected: 3,
+    testDescription: 'should add two numbers',
+  },
+  {
+    a: 2,
+    b: 2,
+    action: Action.Add,
+    expected: 4,
+    testDescription: 'should add two numbers',
+  },
+  {
+    a: 3,
+    b: 2,
+    action: Action.Add,
+    expected: 5,
+    testDescription: 'should add two numbers',
+  },
+  {
+    a: 3,
+    b: 2,
+    action: '+',
+    expected: 5,
+    testDescription: 'should add two numbers',
+  },
+  {
+    a: 3,
+    b: 2,
+    action: Action.Subtract,
+    expected: 1,
+    testDescription: 'should subtract two numbers',
+  },
+  {
+    a: 12,
+    b: 14,
+    action: Action.Subtract,
+    expected: -2,
+    testDescription: 'should subtract two numbers',
+  },
+  {
+    a: 12,
+    b: 14,
+    action: '-',
+    expected: -2,
+    testDescription: 'should subtract two numbers',
+  },
+  {
+    a: 4,
+    b: 4,
+    action: Action.Multiply,
+    expected: 16,
+    testDescription: 'should multiply two numbers',
+  },
+  {
+    a: 4,
+    b: -4,
+    action: Action.Multiply,
+    expected: -16,
+    testDescription: 'should multiply two numbers',
+  },
+  {
+    a: -4,
+    b: -4,
+    action: '*',
+    expected: 16,
+    testDescription: 'should multiply two numbers',
+  },
+  {
+    a: 8,
+    b: 2,
+    action: Action.Divide,
+    expected: 4,
+    testDescription: 'should divide two numbers',
+  },
+  {
+    a: 10,
+    b: -5,
+    action: Action.Divide,
+    expected: -2,
+    testDescription: 'should divide two numbers',
+  },
+  {
+    a: 10,
+    b: 0,
+    action: Action.Divide,
+    expected: Infinity,
+    testDescription: 'should divide two numbers',
+  },
+  {
+    a: -15,
+    b: -3,
+    action: '/',
+    expected: 5,
+    testDescription: 'should divide two numbers',
+  },
+  {
+    a: 2,
+    b: 2,
+    action: Action.Exponentiate,
+    expected: 4,
+    testDescription: 'should exponentiate two numbers',
+  },
+  {
+    a: -2,
+    b: 2,
+    action: Action.Exponentiate,
+    expected: 4,
+    testDescription: 'should exponentiate two numbers',
+  },
+  {
+    a: 4,
+    b: -2,
+    action: Action.Exponentiate,
+    expected: 0.0625,
+    testDescription: 'should exponentiate two numbers',
+  },
+  {
+    a: 4,
+    b: 0.5,
+    action: '^',
+    expected: 2,
+    testDescription: 'should exponentiate two numbers',
+  },
+  {
+    a: 4,
+    b: 1,
+    action: 1,
+    expected: null,
+    testDescription: 'should return null for invalid action',
+  },
+  {
+    a: 4,
+    b: 1,
+    action: 'a',
+    expected: null,
+    testDescription: 'should return null for invalid action',
+  },
+  {
+    a: 4,
+    b: 1,
+    action: null,
+    expected: null,
+    testDescription: 'should return null for invalid action',
+  },
+  {
+    a: 4,
+    b: 1,
+    action: '/*',
+    expected: null,
+    testDescription: 'should return null for invalid action',
+  },
+  {
+    a: 4,
+    b: 1,
+    action: { operator: '*' },
+    expected: null,
+    testDescription: 'should return null for invalid action',
+  },
+  {
+    a: 4,
+    b: 1,
+    action: ['*'],
+    expected: null,
+    testDescription: 'should return null for invalid action',
+  },
+  {
+    a: 'a',
+    b: 1,
+    action: Action.Exponentiate,
+    expected: null,
+    testDescription: 'should return null for invalid arguments',
+  },
+  {
+    a: 2,
+    b: 'b',
+    action: Action.Exponentiate,
+    expected: null,
+    testDescription: 'should return null for invalid arguments',
+  },
+  {
+    a: 'a',
+    b: 'b',
+    action: Action.Exponentiate,
+    expected: null,
+    testDescription: 'should return null for invalid arguments',
+  },
+];
 
 describe('simpleCalculator', () => {
-  // This test case is just to run this test suite, remove it when you write your own tests
-  test('should blah-blah', () => {
-    expect(true).toBe(true);
+  it.each(testCases)('$testDescription', (scenario) => {
+    expect(simpleCalculator(scenario)).toEqual(scenario.expected);
   });
-  // Consider to use Jest table tests API to test all cases above
 });
