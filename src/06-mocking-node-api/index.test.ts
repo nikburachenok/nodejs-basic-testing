@@ -11,19 +11,23 @@ describe('doStuffByTimeout', () => {
     jest.useRealTimers();
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   test('should set timeout with provided callback and timeout', () => {
-    const setTimeoutSpy = jest.spyOn(global, 'setTimeout');
-    const callback = jest.fn();
-    doStuffByTimeout(callback, 100);
-    expect(setTimeoutSpy).toHaveBeenCalledWith(callback, 100);
+    const mockFn = jest.fn();
+    jest.spyOn(global, 'setTimeout');
+    doStuffByTimeout(mockFn, 1000);
+    expect(setTimeout).toBeCalledWith(mockFn, 1000);
   });
 
   test('should call callback only after timeout', () => {
-    const callback = jest.fn();
-    doStuffByTimeout(callback, 1000);
-    expect(callback).not.toBeCalled();
+    const mockFn = jest.fn();
+    doStuffByTimeout(mockFn, 100);
+    expect(mockFn).not.toBeCalled();
     jest.advanceTimersByTime(1000);
-    expect(callback).toBeCalled();
+    expect(mockFn).toHaveBeenCalled();
   });
 });
 
@@ -37,10 +41,10 @@ describe('doStuffByInterval', () => {
   });
 
   test('should set interval with provided callback and timeout', () => {
-    const setIntervalSpy = jest.spyOn(global, 'setInterval');
-    const callback = jest.fn();
-    doStuffByInterval(callback, 1000);
-    expect(setIntervalSpy).toHaveBeenCalledWith(callback, 1000);
+    const mockFn = jest.fn();
+    const spy = jest.spyOn(global, 'setInterval');
+    doStuffByInterval(mockFn, 1000);
+    expect(spy).toHaveBeenCalledWith(mockFn, 1000);
   });
 
   test('should call callback multiple times after multiple intervals', () => {
